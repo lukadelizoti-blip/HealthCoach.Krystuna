@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Coach Krystuna | Футуристичний підхід до здоров'я</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-green: #00ff88;
+            --neon-green: #39ff14;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+            --text-color: #ffffff;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header з анімаціями та світінням */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary-green);
+            text-shadow: 0 0 10px var(--primary-green);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            from {
+                text-shadow: 0 0 10px var(--primary-green);
+            }
+            to {
+                text-shadow: 0 0 20px var(--primary-green), 0 0 30px var(--neon-green);
+            }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            position: relative;
+            font-weight: 500;
+            overflow: hidden;
+        }
+        
+        /* Анімація для всіх пунктів меню при наведенні */
+        nav a:hover {
+            color: var(--primary-green);
+            text-shadow: 0 0 10px var(--primary-green);
+        }
+        
+        /* Лінія для активного пункту меню - поява зліва направо */
+        nav a.active::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-green), var(--neon-green));
+            animation: lineAppear 0.3s ease-out forwards;
+            box-shadow: 0 0 10px var(--primary-green);
+        }
+        
+        @keyframes lineAppear {
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Анімація зникнення для неактивних пунктів */
+        nav a:not(.active)::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-green), var(--neon-green));
+            animation: lineDisappear 0.3s ease-out forwards;
+        }
+        
+        @keyframes lineDisappear {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* Світіння для активного пункту меню */
+        nav a.active {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px var(--primary-green);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #001a00 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 136, 0.1), transparent 70%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-green);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-green), var(--neon-green));
+            color: var(--dark-bg);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.8);
+        }
+        
+        /* Services */
+        .services {
+            padding: 100px 0;
+            background: var(--card-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+        }
+        
+        .section-title span {
+            color: var(--primary-green);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--dark-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-green);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-green), var(--neon-green));
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        /* Contact */
+        .contact {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phone-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+        }
+        
+        .application-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid var(--primary-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--primary-green), var(--neon-green));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid var(--primary-green);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: var(--text-color);
+            font-size: 20px;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 50%;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-green);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--primary-green);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            nav a {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">HealthCoach Krystuna</div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="nav-link active">Головна</a></li>
+                    <li><a href="#services" class="nav-link">Послуги</a></li>
+                    <li><a href="#contact" class="nav-link">Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Футуристичний підхід до <span>вашого здоров'я</span></h1>
+                <p>Інноваційні методи коучингу для досягнення оптимального фізичного та ментального стану з Health Coach Krystuna.</p>
+                <a href="#contact" class="cta-button">Записатися на консультацію</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Мої <span>Послуги</span></h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-apple-alt"></i></div>
+                    <h3>Персональне харчування</h3>
+                    <p>Індивідуальні плани харчування, що враховують ваші потреби, метаболізм та цілі.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-running"></i></div>
+                    <h3>Фітнес-коучинг</h3>
+                    <p>Сучасні тренувальні програми, адаптовані під ваш рівень підготовки та цілі.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Ментальне здоров'я</h3>
+                    <p>Техніки управління стресом, покращення сну та розвитку психологічної стійкості.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Зв'яжіться зі <span>мною</span></h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Контактна інформація</h3>
+                    <p><i class="fas fa-phone"></i> Телефон: <span class="phone-number">+380 93 747 4804</span></p>
+                    <p><i class="fas fa-envelope"></i> Email: delizotikristina88@gmail.com</p>
+                    <p><i class="fas fa-globe"></i> Онлайн консультації по всьому світу</p>
+                    <p style="margin-top: 30px;">Заповніть форму, щоб записатися на першу консультацію. Я зв'яжуся з вами протягом 24 годин.</p>
+                </div>
+                <div class="application-form">
+                    <form id="applicationForm">
+                        <div class="form-group">
+                            <label for="firstName">Ім'я</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Прізвище</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Вік</label>
+                            <input type="number" id="age" name="age" min="16" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Номер телефону</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Надіслати заявку</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">© 2025 Health Coach Krystuna. Всі права захищені.</div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Активне меню при скролі
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function updateActiveMenu() {
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Спочатку оновити активний пункт
+        updateActiveMenu();
+
+        // Додати обробник скролу
+        window.addEventListener('scroll', updateActiveMenu);
+
+        // Плавний скрол при кліку на меню
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Відправка форми
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const age = document.getElementById('age').value;
+            const phone = document.getElementById('phone').value;
+            
+            const message = `Нова заявка:%0AІм'я: ${firstName}%0AПрізвище: ${lastName}%0AВік: ${age}%0AТелефон: ${phone}`;
+            
+            const botToken = '8433116611:AAHIGftEYgcgGOZ4GbDBx39pbumt9YnBTuM';
+            const chatId = '5211946280';
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${message}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert('Заявка відправлена! Ми зв\'яжемося з вами.');
+                        document.getElementById('applicationForm').reset();
+                    } else {
+                        alert('Помилка відправки. Спробуйте ще раз.');
+                    }
+                })
+                .catch(error => {
+                    alert('Помилка відправки. Спробуйте ще раз.');
+                });
+        });
+    </script>
+</body>
+</html>
